@@ -19,7 +19,7 @@ DISK_IDLE_SECS_ON_BAT=2
 
 # Dirty page values (timeouts in secs).
 MAX_LOST_WORK_SECS_ON_AC=15
-MAX_LOST_WORK_SECS_ON_BAT=60
+MAX_LOST_WORK_SECS_ON_BAT=15 # default 60
 
 # Hint: CPU parameters below are disabled by default, remove the leading #
 # to enable them, otherwise kernel default values are used.
@@ -32,8 +32,8 @@ MAX_LOST_WORK_SECS_ON_BAT=60
 #   You *must* disable your distribution's governor settings or conflicts will
 #   occur. ondemand is sufficient for *almost all* workloads, you should know
 #   what you're doing!
-#CPU_SCALING_GOVERNOR_ON_AC=ondemand
-#CPU_SCALING_GOVERNOR_ON_BAT=ondemand
+CPU_SCALING_GOVERNOR_ON_AC=performance # default commented out
+CPU_SCALING_GOVERNOR_ON_BAT=powersave # default commented out
 
 # Set the min/max frequency available for the scaling governor.
 # Possible values strongly depend on your CPU. For available frequencies see
@@ -47,18 +47,18 @@ MAX_LOST_WORK_SECS_ON_BAT=60
 # Limit the max/min P-state to control the power dissipation of the CPU.
 # Values are stated as a percentage of the available performance.
 # Requires an Intel Core i processor with intel_pstate driver.
-#CPU_MIN_PERF_ON_AC=0
-#CPU_MAX_PERF_ON_AC=100
-#CPU_MIN_PERF_ON_BAT=0
-#CPU_MAX_PERF_ON_BAT=30
+CPU_MIN_PERF_ON_AC=0 # default commented out
+CPU_MAX_PERF_ON_AC=100 # default commented out
+CPU_MIN_PERF_ON_BAT=0 # default commented out
+CPU_MAX_PERF_ON_BAT=70 # default commented out
 
 # Set the CPU "turbo boost" feature: 0=disable, 1=allow
 # Requires an Intel Core i processor.
 # Important:
 # - This may conflict with your distribution's governor settings
 # - A value of 1 does *not* activate boosting, it just allows it
-#CPU_BOOST_ON_AC=1
-#CPU_BOOST_ON_BAT=0
+CPU_BOOST_ON_AC=1 # default commented out
+CPU_BOOST_ON_BAT=0 # default commented out
 
 # Minimize number of used CPU cores/hyper-threads under light load conditions
 SCHED_POWERSAVE_ON_AC=0
@@ -194,15 +194,15 @@ USB_BLACKLIST_WWAN=1
 # on system startup: 0=disable, 1=enable.
 # Hint: the parameters DEVICES_TO_DISABLE/ENABLE_ON_STARTUP/SHUTDOWN below
 #   are ignored when this is enabled!
-RESTORE_DEVICE_STATE_ON_STARTUP=0
+RESTORE_DEVICE_STATE_ON_STARTUP=1 # default 0
 
 # Radio devices to disable on startup: bluetooth, wifi, wwan.
 # Separate multiple devices with spaces.
-#DEVICES_TO_DISABLE_ON_STARTUP="bluetooth wifi wwan"
+DEVICES_TO_DISABLE_ON_STARTUP="bluetooth wwan" #default commented out
 
 # Radio devices to enable on startup: bluetooth, wifi, wwan.
 # Separate multiple devices with spaces.
-#DEVICES_TO_ENABLE_ON_STARTUP="wifi"
+DEVICES_TO_ENABLE_ON_STARTUP="wifi" #default commented out
 
 # Radio devices to disable on shutdown: bluetooth, wifi, wwan
 # (workaround for devices that are blocking shutdown).
@@ -220,17 +220,17 @@ RESTORE_DEVICE_STATE_ON_STARTUP=0
 
 # Radio devices to disable on battery when not in use (not connected):
 # bluetooth, wifi, wwan
-#DEVICES_TO_DISABLE_ON_BAT_NOT_IN_USE="bluetooth wifi wwan"
+DEVICES_TO_DISABLE_ON_BAT_NOT_IN_USE="bluetooth wifi wwan" #default commented out
 
 # Battery charge thresholds (ThinkPad only, tp-smapi or acpi-call kernel module
 # required). Charging starts when the remaining capacity falls below the
 # START_CHARGE_TRESH value and stops when exceeding the STOP_CHARGE_TRESH value.
 # Main / Internal battery (values in %)
-#START_CHARGE_THRESH_BAT0=75
-#STOP_CHARGE_THRESH_BAT0=80
+START_CHARGE_THRESH_BAT0=75 #default commented out
+STOP_CHARGE_THRESH_BAT0=100 #default commented out (80)
 # Ultrabay / Slice / Replaceable battery (values in %)
-#START_CHARGE_THRESH_BAT1=75
-#STOP_CHARGE_THRESH_BAT1=80
+START_CHARGE_THRESH_BAT1=75 #default commented out
+STOP_CHARGE_THRESH_BAT1=100 #default commented out (80)
 
 # ------------------------------------------------------------------------------
 # tlp-rdw - Parameters for the radio device wizard
@@ -241,12 +241,12 @@ RESTORE_DEVICE_STATE_ON_STARTUP=0
 # - Separate multiple radio devices with spaces.
 
 # Radio devices to disable on connect.
-#DEVICES_TO_DISABLE_ON_LAN_CONNECT="wifi wwan"
+DEVICES_TO_DISABLE_ON_LAN_CONNECT="wifi wwan" #default commented out
 #DEVICES_TO_DISABLE_ON_WIFI_CONNECT="wwan"
 #DEVICES_TO_DISABLE_ON_WWAN_CONNECT="wifi"
 
 # Radio devices to enable on disconnect.
-#DEVICES_TO_ENABLE_ON_LAN_DISCONNECT="wifi wwan"
+DEVICES_TO_ENABLE_ON_LAN_DISCONNECT="wifi wwan" #default commented out
 #DEVICES_TO_ENABLE_ON_WIFI_DISCONNECT=""
 #DEVICES_TO_ENABLE_ON_WWAN_DISCONNECT=""
 
