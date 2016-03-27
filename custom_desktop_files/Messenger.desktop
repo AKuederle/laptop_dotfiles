@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Messenger
+GenericName=Chat
+Exec=chromium --app="https://www.messenger.com/" %U
+Terminal=false
+Icon=chromium
+Type=Application
+Categories=GTK;Network;WebBrowser;

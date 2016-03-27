@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=WhatsApp
+GenericName=Chat
+Exec=chromium --app="https://web.whatsapp.com/" %U
+Terminal=false
+Icon=chromium
+Type=Application
+Categories=GTK;Network;WebBrowser;
