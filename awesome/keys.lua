@@ -1,12 +1,14 @@
 -- launch applications
 globalkeys = awful.util.table.join(globalkeys,
+    -- Mod + F3: Launch webbrowser (chromium)
     awful.key({ modkey, }, "#69", function ()
       local matcher = function (c)
-         return awful.rules.match(c, {class = 'chromium'})
+         return awful.rules.match(c, {instance = 'chromium'})
        end
        awful.client.run_or_raise('chromium', matcher)
      end),
 
+    -- Mod + F2: Launch texteditor (sublime)
     awful.key({ modkey, }, "#68", function ()
       local matcher = function (c)
          return awful.rules.match(c, {class = 'subl3'})
@@ -14,6 +16,22 @@ globalkeys = awful.util.table.join(globalkeys,
        awful.client.run_or_raise('subl3', matcher)
      end),
 
+    -- Mod + F7: Launch all Chat Apps (Hangouts, Whatsapp, Messenger)
+    awful.key({ modkey, }, "#73", function ()
+      local matcher = function (c)
+         return awful.rules.match(c, { instance = "web.whatsapp.com" })
+       end
+       awful.client.run_or_raise('WhatsApp', matcher)
+      local matcher = function (c)
+         return awful.rules.match(c, { instance = "www.messenger.com" })
+       end
+       awful.client.run_or_raise('Messenger', matcher)
+      local matcher = function (c)
+         return awful.rules.match(c, { instance = "crx_knipolnnllmklapflnccelgolnpehhpl" })
+       end
+       awful.client.run_or_raise('Hangouts', matcher)
+     end),
+    
     awful.key({ modkey, }, "e",      function () awful.util.spawn("thunar") end),
     awful.key({ modkey, }, "Return", function () awful.util.spawn(terminal) end)
 )
@@ -92,13 +110,12 @@ globalkeys = awful.util.table.join(globalkeys,
                   mypromptbox[mouse.screen].widget,
                   awful.util.eval, nil,
                   awful.util.getdir("cache") .. "/history_eval")
-              end),
-    -- Menubar
-    awful.key({ modkey }, "p", function() menubar.show() end)
+              end)
 )
 
 clientkeys = awful.util.table.join(
     awful.key({ modkey,           }, "f",      function (c) c.fullscreen = not c.fullscreen  end),
+    awful.key({ modkey,           }, "s",      function (c) c.sticky = not c.sticky          end),
     awful.key({ modkey, "Shift"   }, "c",      function (c) c:kill()                         end),
     awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle                     ),
     awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end),
