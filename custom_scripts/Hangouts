@@ -1,0 +1,3 @@
+#!/bin/bash
+
+chromium --profile-directory=Hangouts --app-id=knipolnnllmklapflnccelgolnpehhpl
