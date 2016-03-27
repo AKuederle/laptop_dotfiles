@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# toogle wifi and sen d notification.
+# modified based on http://unix.stackexchange.com/questions/264336/wifi-toggle-script-not-running-properly-through-i3
+
+if nmcli r wifi | grep -q "disabled" ; then
+    nmcli r wifi on
+    notify-send -i network-wireless-full "Wireless enabled" "Your wireless adaptor has been enabled."
+else
+    nmcli r wifi off
+    notify-send -i network-wireless-disconnected "Wireless disabled" "Your wireless adaptor has been disabled."
+fi
