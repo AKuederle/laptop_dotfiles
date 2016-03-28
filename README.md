@@ -9,4 +9,5 @@
 | Bash Profile   | ./.bash_profile             | ~/.bash_profile                     |
 | TLP-power      | ./tlp                       | /etc/default/tlp                    |
 | awesome-config | ./awesome/                  | ~/.config/awesome/                  |
-| volumeicon     | ./volumeicon/volumeicon     | ~/.config/volumeicon/volumeicon     |                
+| volumeicon     | ./volumeicon/volumeicon     | ~/.config/volumeicon/volumeicon     |
+| X-startupfile  | ./.xinitrc                  | ~/.xinitrc                          |                         
