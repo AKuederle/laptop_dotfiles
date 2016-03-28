@@ -16,5 +16,5 @@ end
 
 -- List of applications:
 run_once("dropbox", 0)
-run_once("nm-applet", 2)
+run_once("nm-applet", 3)
 --

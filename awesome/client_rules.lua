@@ -7,7 +7,7 @@ awful.rules.rules = {
                      border_color = beautiful.border_normal,
                      focus = awful.client.focus.filter,
                      raise = true,
-                     keys = clientkeys,
+                     keys = awful.util.table.join(clientkeys_all, clientkeys_extra),
                      buttons = clientbuttons } },
     { rule = { class = "MPlayer" },
       properties = { floating = true } },
@@ -33,5 +33,11 @@ awful.rules.rules = {
     -- Set Hangouts to always map on tags number 7(chat) of screen 1.
     { rule = { instance = "crx_knipolnnllmklapflnccelgolnpehhpl" },
       properties = { tag = tags[1][7], sticky = false }},
+
+    { rule = { instance = "dashboard-terminal" },
+      properties = { tag = tags[1][10], keys = clientkeys_all, switchtotag = true }},  
+
+    { rule = { instance = "trello.com__b_tACplLOR_to-do" },
+      properties = { tag = tags[1][10], keys = clientkeys_all, switchtotag = true }},  
 }
 -- }}}

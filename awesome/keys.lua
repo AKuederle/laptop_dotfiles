@@ -31,6 +31,20 @@ globalkeys = awful.util.table.join(globalkeys,
        end
        awful.client.run_or_raise('Hangouts', matcher)
      end),
+
+    -- Alt + Space: Dashboard terminal
+    awful.key({ "Mod1", }, "space", function ()
+      local s = mouse.screen
+      awful.tag.history.update(screen[s])
+      if awful.tag.selected(s) == awful.tag.gettags(s)[10] then
+        awful.tag.history.restore(s)
+      else
+        local matcher = function (c)
+           return awful.rules.match(c, {instance = 'dashboard-terminal'})
+         end
+         awful.client.run_or_raise( terminal .. ' --name="dashboard-terminal"', matcher)
+      end   
+     end),
     
     awful.key({ modkey, }, "e",      function () awful.util.spawn("thunar") end),
     awful.key({ modkey, }, "Return", function () awful.util.spawn(terminal) end)
@@ -49,7 +63,12 @@ globalkeys = awful.util.table.join(globalkeys,
     awful.key({ }, "XF86WLAN",              function () awful.util.spawn_with_shell("wifi-toggle") end),
     awful.key({ }, "XF86Search",            function () end),
     awful.key({ }, "XF86LaunchA",           function () end),
-    awful.key({ }, "XF86Explorer",          function () end)
+    awful.key({ }, "XF86Explorer",          function ()
+        local matcher = function (c)
+           return awful.rules.match(c, {instance = "trello.com__b_tACplLOR_to-do"})
+         end
+         awful.client.run_or_raise( "Trello", matcher)
+      end)
 )
 --
 
@@ -113,24 +132,27 @@ globalkeys = awful.util.table.join(globalkeys,
               end)
 )
 
-clientkeys = awful.util.table.join(
+clientkeys_all = awful.util.table.join(
     awful.key({ modkey,           }, "f",      function (c) c.fullscreen = not c.fullscreen  end),
     awful.key({ modkey,           }, "s",      function (c) c.sticky = not c.sticky          end),
-    awful.key({ modkey, "Shift"   }, "c",      function (c) c:kill()                         end),
     awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle                     ),
     awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end),
-    awful.key({ modkey,           }, "o",      awful.client.movetoscreen                        ),
     awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop            end),
+    awful.key({ modkey,           }, "m",
+        function (c)
+            c.maximized_horizontal = not c.maximized_horizontal
+            c.maximized_vertical   = not c.maximized_vertical
+        end)
+)
+
+clientkeys_extra = awful.util.table.join(
+    awful.key({ modkey, "Shift"   }, "c",      function (c) c:kill()                         end),
+    awful.key({ modkey,           }, "o",      awful.client.movetoscreen                        ),
     awful.key({ modkey,           }, "n",
         function (c)
             -- The client currently has the input focus, so it cannot be
             -- minimized, since minimized clients can't have the focus.
             c.minimized = true
-        end),
-    awful.key({ modkey,           }, "m",
-        function (c)
-            c.maximized_horizontal = not c.maximized_horizontal
-            c.maximized_vertical   = not c.maximized_vertical
         end)
 )
 

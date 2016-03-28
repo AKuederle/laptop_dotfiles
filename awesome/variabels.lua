@@ -1,9 +1,8 @@
 -- {{{ Variable definitions
 
 -- This is used later as the default terminal and editor to run.
-terminal = "termite"
+terminal = "termite -e /bin/zsh"
 editor = os.getenv("EDITOR") or "subl3"
-editor_cmd = terminal .. " -e " .. editor
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
@@ -30,5 +29,5 @@ layouts =
 }
 
 -- Table of tag names displayed
-tag_names = { "main", "work", "www", "mail", 5, 6, "chat", 8, 9 }
+tag_names = { "main", "work", "www", "mail", 5, 6, "chat", 8, 9, "#" }
 -- }}}

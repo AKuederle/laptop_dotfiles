@@ -1,0 +1,3 @@
+#!/bin/bash
+
+chromium --app="https://trello.com/b/tACplLOR/to-do" %U
