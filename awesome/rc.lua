@@ -36,7 +36,7 @@ dofile( here .. "/" .. "variabels.lua")
 dofile( here .. "/" .. "default.lua")
 dofile( here .. "/" .. "keys.lua")
 dofile( here .. "/" .. "client_rules.lua")
-dofile( here .. "/" .. "autostart.lua")
+-- dofile( here .. "/" .. "autostart.lua")
 
 -- Set keys
 root.keys(globalkeys)
