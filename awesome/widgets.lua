@@ -1,9 +1,13 @@
 local wibox = require("wibox")
 -- {{{ Wibox
 
--- Create a 2 space seperator
-twospaces = wibox.widget.textbox()
-twospaces:set_text("  ")
+-- Create a 4 space seperator
+fourspaces = wibox.widget.textbox()
+fourspaces:set_text("    ")
+
+-- Create a 1 space seperator
+space = wibox.widget.textbox()
+space:set_text(" ")
 -- Create a textclock widget
 mytextclock = awful.widget.textclock("%H:%M")
 
@@ -14,7 +18,7 @@ lain.widgets.calendar:attach(mytextclock, {font = "inconsolata"})
 local function batwidget( number )
   local batterywidget = wibox.widget.textbox()    
   batterywidget:set_text("Battery" .. tostring(number))    
-  batterywidgettimer = timer({ timeout = 5 })    
+  batterywidgettimer = timer({ timeout = 1 })    
   batterywidgettimer:connect_signal("timeout",    
     function()    
       local bat_info = awful.util.pread("acpi | awk 'BEGIN { FS=\":\"; } /^Battery " .. tostring(number) .. "/ {print $2}'")
@@ -24,12 +28,13 @@ local function batwidget( number )
       local text = bat_perc:gsub('\n', '') .. "%"
       if bat_stat:find("Charging") then
         text = markup.fg.color("#20E337", text)
-      end
-      if tonumber(bat_perc) <= 30 then
+      elseif ac_stat:find("on") then
+        text = markup.fg.color("#F5A111", text)
+      elseif tonumber(bat_perc) <= 30 then
         text = markup.fg.color("#E63E10", text)
       end
-      if ac_stat:find("on") then
-        text = markup.fg.color("#F5A111", text)
+      if tonumber(bat_perc) < 10 then
+        text = " " .. text
       end
       batterywidget:set_markup(text)
     end    
@@ -39,7 +44,7 @@ local function batwidget( number )
 end
 
 mybattext = wibox.widget.textbox()
-mybattext:set_markup(markup.bold("BAT "))
+mybattext:set_markup(markup.bold("BAT"))
 mybat1 = batwidget(0)
 mybat2 = batwidget(1)
 
@@ -125,13 +130,13 @@ for s = 1, screen.count() do
     -- Widgets that are aligned to the right
     local right_layout = wibox.layout.fixed.horizontal()
     if s == 1 then right_layout:add(wibox.widget.systray()) end
-    right_layout:add(twospaces)
-    right_layout:add(twospaces)
+    right_layout:add(fourspaces)
     right_layout:add(mybattext)
+    right_layout:add(space)
     right_layout:add(mybat1)
+    right_layout:add(space)
     right_layout:add(mybat2)
-    right_layout:add(twospaces)
-    right_layout:add(twospaces)
+    right_layout:add(fourspaces)
     right_layout:add(mytextclock)
     right_layout:add(mylayoutbox[s])
 
