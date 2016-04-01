@@ -1,6 +1,8 @@
 awful     = require("awful")
 naughty   = require("naughty")
 beautiful = require("beautiful")
+lain      = require("lain")
+
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -34,8 +36,10 @@ beautiful.init("/usr/share/awesome/themes/default/theme.lua")
 
 dofile( here .. "/" .. "variabels.lua")
 dofile( here .. "/" .. "default.lua")
+dofile( here .. "/" .. "widgets.lua")
 dofile( here .. "/" .. "keys.lua")
 dofile( here .. "/" .. "client_rules.lua")
+-- Autostart is now handeled directly in xinitrc
 -- dofile( here .. "/" .. "autostart.lua")
 
 -- Set keys
