@@ -7,6 +7,39 @@ mytextclock = awful.widget.textclock()
 -- attach a calender pop-up to the texclock
 lain.widgets.calendar:attach(mytextclock, {font = "inconsolata"})
 
+-- create a batterywidget
+local function batwidget( number )
+  local batterywidget = wibox.widget.textbox()    
+  batterywidget:set_text("Battery" .. tostring(number))    
+  batterywidgettimer = timer({ timeout = 5 })    
+  batterywidgettimer:connect_signal("timeout",    
+    function()    
+      local bat_info = awful.util.pread("acpi | awk 'BEGIN { FS=\":\"; } /^Battery " .. tostring(number) .. "/ {print $2}'")
+      local bat_perc = awful.util.pread("echo \"" .. bat_info .. "\" | awk 'BEGIN { FS=\",\"; } {print $2;}' | cut -c-3")
+      local bat_stat = awful.util.pread("echo \"" .. bat_info .. "\" | awk 'BEGIN { FS=\",\"; } {print $1;}'"):gsub('\n', '')
+      local ac_stat  = awful.util.pread("acpi -a")
+      local text = bat_perc:gsub('\n', '') .. "%"
+      if bat_stat:find("Charging") then
+        text = markup.fg.color("#20E337", text)
+      end
+      if tonumber(bat_perc) <= 30 then
+        text = markup.fg.color("#E63E10", text)
+      end
+      if ac_stat:find("on") then
+        text = markup.fg.color("#F5A111", text)
+      end
+      batterywidget:set_markup(text)
+    end    
+  ) 
+  batterywidgettimer:start()
+  return batterywidget
+end
+
+mybattext = wibox.widget.textbox()
+mybattext:set_markup(markup.bold("BAT "))
+mybat1 = batwidget(0)
+mybat2 = batwidget(1)
+
 mywibox = {}
 mypromptbox = {}
 mylayoutbox = {}
@@ -89,6 +122,9 @@ for s = 1, screen.count() do
     -- Widgets that are aligned to the right
     local right_layout = wibox.layout.fixed.horizontal()
     if s == 1 then right_layout:add(wibox.widget.systray()) end
+    right_layout:add(mybattext)
+    right_layout:add(mybat1)
+    right_layout:add(mybat2)
     right_layout:add(mytextclock)
     right_layout:add(mylayoutbox[s])
 

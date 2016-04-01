@@ -1,3 +1,5 @@
+-- !!!!! This file is not loaded anymore, as autostart is handled in xinitrc !!!!!
+
 -- Autostart Programms with awesome
 
 -- Function which checks, if programm is running and only launches it if not.

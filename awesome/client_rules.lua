@@ -20,10 +20,10 @@ awful.rules.rules = {
       properties = { tag = tags[1][3] } },
     -- Set Chromium to always map on tags number 3(www) of screen 1.
     { rule = { class = "chromium" },
-      properties = { tag = tags[1][3] } },
+      properties = { tag = tags[1][3], switchtotag = true } },
     -- Set Sublime to always map on tags number 2(work) of screen 1.
     { rule = { class = "Subl3" },
-      properties = { tag = tags[1][2] } },
+      properties = { tag = tags[1][2], switchtotag = true } },
     -- Set Whatsapp to always map on tags number 7(chat) of screen 1.
     { rule = { instance = "web.whatsapp.com" },
       properties = { tag = tags[1][7] } },
