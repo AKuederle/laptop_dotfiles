@@ -20,10 +20,21 @@ local function volwidget( )
   volumewidgettimer = timer({ timeout = 5 })
   volumewidget:set_markup("%")
   volumewidget.update = function ()
-    local vol = awful.util.pread("amixer sget Master | gawk 'match($0, /Front Left:.*?\\[(.*?)%/, a) {print a[1]}'")
-    vol = vol:gsub('\n', '') .. "%"
-    -- naughty.notify({text=vol})
-    volumewidget:set_markup(vol)
+    local vol_info = awful.util.pread("amixer sget Master | gawk 'match($0, /Front Left:.*?\\[(.*?)%] \\[(.*?)]/, a) {print a[1],a[2]}'")
+    local temp = {}
+    for match in vol_info:gmatch("%w+") do table.insert(temp, match) end
+    local vol = temp[1]
+    local state = temp[2]
+    local text = ""
+    if tonumber(vol) == 100 then
+      text = "MAX"
+    else
+      text = vol .. "%"
+    end
+    if state:find("off") then
+      text = markup.fg.color("#E63E10", text)
+    end
+    volumewidget:set_markup( text )
   end
   volumewidgettimer:connect_signal("timeout", volumewidget.update)
   volumewidgettimer:start()
