@@ -56,10 +56,10 @@ globalkeys = awful.util.table.join(globalkeys,
 
 -- Special Keys (Fn + ..)
 globalkeys = awful.util.table.join(globalkeys,
-    -- audiokeys are handeld by the volumeicon applet. This allows to show popups when changing the volume
-    -- awful.key({ }, "XF86AudioMute",         function () awful.util.spawn_with_shell("amixer -q sset Master toggle") end),
-    -- awful.key({ }, "XF86AudioLowerVolume",  function () awful.util.spawn_with_shell("amixer -q sset Master 2%-") end),
-    -- awful.key({ }, "XF86AudioRaiseVolume",  function () awful.util.spawn_with_shell("amixer -q sset Master 2%+") end),
+    -- if audiokeys are handeld by the volumeicon applet, comment them out. This allows to show popups when changing the volume
+    awful.key({ }, "XF86AudioMute",         function () awful.util.spawn_with_shell("amixer -q sset Master toggle") volumewidget:update() end),
+    awful.key({ }, "XF86AudioLowerVolume",  function () awful.util.spawn_with_shell("amixer -q sset Master 2%-") volumewidget:update() end),
+    awful.key({ }, "XF86AudioRaiseVolume",  function () awful.util.spawn_with_shell("amixer -q sset Master 2%+") volumewidget:update() end),
     awful.key({ }, "XF86AudioMicMute",      function () awful.util.spawn_with_shell("amixer set Capture toggle") end),
     awful.key({ }, "XF86MonBrightnessDown", function () awful.util.spawn_with_shell("xbacklight -dec 10") end),
     awful.key({ }, "XF86MonBrightnessUp",   function () awful.util.spawn_with_shell("xbacklight -inc 10") end),

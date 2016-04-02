@@ -17,7 +17,7 @@ lain.widgets.calendar:attach(mytextclock, {font = "inconsolata"})
 -- create an audio widget
 local function volwidget( )
   local volumewidget = wibox.widget.textbox()
-  volumewidgettimer = timer({ timeout = 3 })
+  volumewidgettimer = timer({ timeout = 5 })
   volumewidget:set_markup("%")
   volumewidget.update = function ()
     local vol = awful.util.pread("amixer sget Master | gawk 'match($0, /Front Left:.*?\\[(.*?)%/, a) {print a[1]}'")
@@ -27,12 +27,16 @@ local function volwidget( )
   end
   volumewidgettimer:connect_signal("timeout", volumewidget.update)
   volumewidgettimer:start()
+  volumewidget:update()
   return volumewidget
 end
 
 myvoltext = wibox.widget.textbox()
-myvoltext:set_markup(markup.bold("VOL"))
+myvoltext:set_markup(markup.bold("VOL "))
 volumewidget = volwidget()
+mixer_button = awful.button({ }, 1, function () awful.util.spawn("pavucontrol") end)
+volumewidget:buttons( mixer_button )
+myvoltext:buttons( mixer_button )
 
 -- create a batterywidget
 local function batwidget( number )
@@ -154,7 +158,6 @@ for s = 1, screen.count() do
     if s == 1 then right_layout:add(wibox.widget.systray()) end
     right_layout:add(fourspaces)
     right_layout:add(myvoltext)
-    right_layout:add(space)
     right_layout:add(volumewidget)
     right_layout:add(fourspaces)
     right_layout:add(mybattext)

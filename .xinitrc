@@ -51,7 +51,7 @@ fi
 # Autostart
 dropbox &
 nm-applet &
-volumeicon &
+# volumeicon &
 
 # Start Awesome_wm
 exec awesome
