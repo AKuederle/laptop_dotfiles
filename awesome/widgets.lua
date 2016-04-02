@@ -14,11 +14,31 @@ mytextclock = awful.widget.textclock("%H:%M")
 -- attach a calender pop-up to the texclock
 lain.widgets.calendar:attach(mytextclock, {font = "inconsolata"})
 
+-- create an audio widget
+local function volwidget( )
+  local volumewidget = wibox.widget.textbox()
+  volumewidgettimer = timer({ timeout = 3 })
+  volumewidget:set_markup("%")
+  volumewidget.update = function ()
+    local vol = awful.util.pread("amixer sget Master | gawk 'match($0, /Front Left:.*?\\[(.*?)%/, a) {print a[1]}'")
+    vol = vol:gsub('\n', '') .. "%"
+    -- naughty.notify({text=vol})
+    volumewidget:set_markup(vol)
+  end
+  volumewidgettimer:connect_signal("timeout", volumewidget.update)
+  volumewidgettimer:start()
+  return volumewidget
+end
+
+myvoltext = wibox.widget.textbox()
+myvoltext:set_markup(markup.bold("VOL"))
+volumewidget = volwidget()
+
 -- create a batterywidget
 local function batwidget( number )
   local batterywidget = wibox.widget.textbox()    
   batterywidget:set_text("Battery" .. tostring(number))    
-  batterywidgettimer = timer({ timeout = 1 })    
+  batterywidgettimer = timer({ timeout = 3 })    
   batterywidgettimer:connect_signal("timeout",    
     function()    
       local bat_info = awful.util.pread("acpi | awk 'BEGIN { FS=\":\"; } /^Battery " .. tostring(number) .. "/ {print $2}'")
@@ -130,6 +150,10 @@ for s = 1, screen.count() do
     -- Widgets that are aligned to the right
     local right_layout = wibox.layout.fixed.horizontal()
     if s == 1 then right_layout:add(wibox.widget.systray()) end
+    right_layout:add(fourspaces)
+    right_layout:add(myvoltext)
+    right_layout:add(space)
+    right_layout:add(volumewidget)
     right_layout:add(fourspaces)
     right_layout:add(mybattext)
     right_layout:add(space)
