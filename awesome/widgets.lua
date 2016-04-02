@@ -38,28 +38,30 @@ volumewidget = volwidget()
 local function batwidget( number )
   local batterywidget = wibox.widget.textbox()    
   batterywidget:set_text("Battery" .. tostring(number))    
-  batterywidgettimer = timer({ timeout = 3 })    
-  batterywidgettimer:connect_signal("timeout",    
-    function()    
-      local bat_info = awful.util.pread("acpi | awk 'BEGIN { FS=\":\"; } /^Battery " .. tostring(number) .. "/ {print $2}'")
-      local bat_perc = awful.util.pread("echo \"" .. bat_info .. "\" | awk 'BEGIN { FS=\",\"; } {print $2;}' | cut -c-3")
-      local bat_stat = awful.util.pread("echo \"" .. bat_info .. "\" | awk 'BEGIN { FS=\",\"; } {print $1;}'"):gsub('\n', '')
-      local ac_stat  = awful.util.pread("acpi -a")
-      local text = bat_perc:gsub('\n', '') .. "%"
-      if bat_stat:find("Charging") then
-        text = markup.fg.color("#20E337", text)
-      elseif ac_stat:find("on") then
-        text = markup.fg.color("#F5A111", text)
-      elseif tonumber(bat_perc) <= 30 then
-        text = markup.fg.color("#E63E10", text)
-      end
-      if tonumber(bat_perc) < 10 then
-        text = " " .. text
-      end
-      batterywidget:set_markup(text)
-    end    
-  ) 
+  batterywidgettimer = timer({ timeout = 3 })
+  batterywidget.update = function()
+    local bat_info = awful.util.pread("acpi | gawk 'match($0, /Battery " .. number .. ": (.*?), (.*?)%/, a) {print a[1],a[2]}'")
+    local temp = {}
+    for match in bat_info:gmatch("%w+") do table.insert(temp, match) end
+    local bat_perc = temp[2]
+    local bat_stat = temp[1]
+    local ac_stat  = awful.util.pread("acpi -a")
+    local text = bat_perc:gsub('\n', '') .. "%"
+    if bat_stat:find("Charging") then
+      text = markup.fg.color("#20E337", text)
+    elseif ac_stat:find("on") then
+      text = markup.fg.color("#F5A111", text)
+    elseif tonumber(bat_perc) <= 30 then
+      text = markup.fg.color("#E63E10", text)
+    end
+    if tonumber(bat_perc) < 10 then
+      text = " " .. text
+    end
+    batterywidget:set_markup(text)
+  end 
+  batterywidgettimer:connect_signal("timeout", batterywidget.update) 
   batterywidgettimer:start()
+  batterywidget:update()
   return batterywidget
 end
 
