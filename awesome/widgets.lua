@@ -62,15 +62,17 @@ local function batwidget( number )
     local bat_stat = temp[1]
     local ac_stat  = awful.util.pread("acpi -a")
     local text = bat_perc:gsub('\n', '') .. "%"
+    if tonumber(bat_perc) < 10 then
+      text = " " .. text
+    elseif tonumber(bat_perc) == 100 then
+      text = "MAX"
+    end
     if bat_stat:find("Charging") then
       text = markup.fg.color("#20E337", text)
     elseif ac_stat:find("on") then
       text = markup.fg.color("#F5A111", text)
     elseif tonumber(bat_perc) <= 30 then
       text = markup.fg.color("#E63E10", text)
-    end
-    if tonumber(bat_perc) < 10 then
-      text = " " .. text
     end
     batterywidget:set_markup(text)
   end 
