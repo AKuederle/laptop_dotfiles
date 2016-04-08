@@ -10,4 +10,6 @@
 | TLP-power      | ./tlp                       | /etc/default/tlp                    |
 | awesome-config | ./awesome/                  | ~/.config/awesome/                  |
 | volumeicon     | ./volumeicon/volumeicon     | ~/.config/volumeicon/volumeicon     |
-| X-startupfile  | ./.xinitrc                  | ~/.xinitrc                          |                         
+| X-startupfile  | ./.xinitrc                  | ~/.xinitrc                          |
+| Powerevents    | ./logind.conf               | /etc/systemd/logind.conf            |
+| Xresources     | ./.Xresources               | ~/.Xresources                       |                         

@@ -50,7 +50,8 @@ globalkeys = awful.util.table.join(globalkeys,
      end),
     
     awful.key({ modkey, }, "e",      function () awful.util.spawn("thunar") end),
-    awful.key({ modkey, }, "Return", function () awful.util.spawn(terminal) end)
+    awful.key({ modkey, }, "Return", function () awful.util.spawn(terminal) end),
+    awful.key({ modkey, }, "d", function () awful.util.spawn("rofi -show combi -combi-modi 'window,run'") end),
 )
 -- 
 
@@ -72,7 +73,10 @@ globalkeys = awful.util.table.join(globalkeys,
            return awful.rules.match(c, {instance = "trello.com__b_tACplLOR_to-do"})
          end
          awful.client.run_or_raise( "Trello", matcher)
-      end)
+      end),
+    -- To make this powerbutton work, powerbutton handling must be set to ingnore in /ect/systemd/logind.conf
+    awful.key({ }, "XF86PowerOff",          function () awful.util.spawn_with_shell("shutdown_menu") end)
+    
 )
 --
 

@@ -1,0 +1,27 @@
+#!/bin/bash
+#title           : shutdown
+#description     : A simple rofi call to logout, hibernate, shutdown, sleep, or restart 
+#author      : Arne Küderle
+#date            : 201602
+#notes           : Install rofi to use this script. For the best experience create a hotkey
+
+actions=("logout\nrestart\nshutdown\nsleep")
+action=$(echo -e $actions | rofi -dmenu -fn "-xos4-terminus-medium-r-*-*-20-*")
+case "$action" in
+    logout)
+        echo 'awesome.quit()' | awesome-client #You should change this line depending on your WM
+        ;;
+        
+    restart)
+        systemctl reboot
+        ;;
+
+    shutdown)
+        systemctl poweroff
+        
+        ;;
+
+    sleep)
+        systemctl suspend
+        ;;
+esac
