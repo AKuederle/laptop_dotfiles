@@ -50,6 +50,8 @@ fi
 
 eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
 export SSH_AUTH_SOCK
+export J2D_D3D=false
+export MATLAB_JAVA=/usr/lib/jvm/java-8-openjdk/jre
 
 
 # Autostart
