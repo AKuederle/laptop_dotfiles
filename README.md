@@ -12,4 +12,6 @@
 | volumeicon     | ./volumeicon/volumeicon     | ~/.config/volumeicon/volumeicon     |
 | X-startupfile  | ./.xinitrc                  | ~/.xinitrc                          |
 | Powerevents    | ./logind.conf               | /etc/systemd/logind.conf            |
-| Xresources     | ./.Xresources               | ~/.Xresources                       |                         
+| Xresources     | ./.Xresources               | ~/.Xresources                       |
+| PAM login conf | ./pam.d/login               | /etc/pam.d/login                    |
+| PAM passwd conf| ./pam.d/passwd              | /etc/pam.d/passwd                   |                         
