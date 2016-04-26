@@ -1,0 +1,3 @@
+[submodule "awesome/redshift"]
+	path = awesome/redshift
+	url = git://github.com/YoRyan/awesome-redshift.git
