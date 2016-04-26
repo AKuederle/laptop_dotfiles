@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# matlab file to launch matlab through dmenu in desktopmode
+matlab -desktop
