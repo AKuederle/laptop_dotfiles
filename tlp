@@ -226,10 +226,10 @@ DEVICES_TO_DISABLE_ON_BAT_NOT_IN_USE="bluetooth wifi wwan" #default commented ou
 # required). Charging starts when the remaining capacity falls below the
 # START_CHARGE_TRESH value and stops when exceeding the STOP_CHARGE_TRESH value.
 # Main / Internal battery (values in %)
-START_CHARGE_THRESH_BAT0=75 #default commented out
+START_CHARGE_THRESH_BAT0=90 #default commented out
 STOP_CHARGE_THRESH_BAT0=100 #default commented out (80)
 # Ultrabay / Slice / Replaceable battery (values in %)
-START_CHARGE_THRESH_BAT1=75 #default commented out
+START_CHARGE_THRESH_BAT1=90 #default commented out
 STOP_CHARGE_THRESH_BAT1=100 #default commented out (80)
 
 # ------------------------------------------------------------------------------
