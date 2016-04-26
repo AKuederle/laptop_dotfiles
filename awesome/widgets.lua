@@ -87,7 +87,7 @@ mybattext:set_markup(markup.bold("BAT"))
 mybat1 = batwidget(0)
 mybat2 = batwidget(1)
 
--- create lcokscreen widget
+-- create lockscreen widget
 local function lockscreenwidget( )
   local lockwidget = wibox.widget.textbox()
   lockwidget:set_markup(markup.bold(" L "))
@@ -123,6 +123,37 @@ lock_controls = awful.util.table.join(
 )
 mylockscreenwidget:buttons( lock_controls )
 
+-- create redshift widget
+local function redshiftwidget( )
+  local redwidget = wibox.widget.textbox()
+  redwidget:set_markup(markup.bold(" R "))
+  local redshift_status = redshift.state
+  redwidgettimer = timer({ timeout = 120 })
+  redwidget.update = function()
+    if redshift_status == 1 then
+      redwidget:set_markup(markup.bold(" R "))
+    else
+      redwidget:set_markup(markup.fg.color("#E63E10", markup.bold(" R ")))
+    end
+  end
+  redwidget.toggle = function()
+    if redshift_status == 0 then
+      redshift.dim()
+    else
+      redshift.undim()
+    end
+    redshift_status = redshift.state
+    redwidget:update()
+  end
+  redwidgettimer:connect_signal("timeout", redwidget.update) 
+  redwidgettimer:start()
+  redwidget:update()
+  return redwidget
+end
+
+myredshiftwidget = redshiftwidget()
+red_controls = awful.button({ }, 1, function () myredshiftwidget:toggle() end)
+myredshiftwidget:buttons( red_controls )
 
 mywibox = {}
 mypromptbox = {}
@@ -218,6 +249,7 @@ for s = 1, screen.count() do
     right_layout:add(space)
     right_layout:add(space)
     right_layout:add(mylockscreenwidget)
+    right_layout:add(myredshiftwidget)
     right_layout:add(space)
     right_layout:add(mytextclock)
     right_layout:add(mylayoutbox[s])
