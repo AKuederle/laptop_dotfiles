@@ -69,9 +69,10 @@ globalkeys = awful.util.table.join(globalkeys,
     awful.key({ modkey }, "XF86MonBrightnessDown", function () redshift.toggle() end),
     awful.key({ modkey }, "XF86MonBrightnessUp",   function () redshift.toggle() end),
     awful.key({ }, "XF86Display",           function () end),
+    awful.key({ modkey }, "XF86Display",           function () mylockscreenwidget:toggle() end),
     awful.key({ }, "XF86WLAN",              function () awful.util.spawn_with_shell("wifi-toggle") end),
     awful.key({ }, "XF86Search",            function () end),
-    awful.key({ }, "XF86LaunchA",           function () mylockscreenwidget:toggle() end),
+    awful.key({ }, "XF86LaunchA",           function () end),
     awful.key({ }, "XF86Explorer",          function ()
         local matcher = function (c)
            return awful.rules.match(c, {instance = "trello.com__b_tACplLOR_to-do"})
