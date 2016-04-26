@@ -30,4 +30,8 @@ layouts =
 
 -- Table of tag names displayed
 tag_names = { "main", "work", "www", "mail", 5, 6, "chat", 8, 9, "#" }
+
+-- Redshift configuration
+redshift.options = "-t 6500:3600 -r"
+redshift.init(1)
 -- }}}

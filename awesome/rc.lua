@@ -2,6 +2,7 @@ awful     = require("awful")
 naughty   = require("naughty")
 beautiful = require("beautiful")
 lain      = require("lain")
+redshift  = require("redshift")
 markup = lain.util.markup
 
 
