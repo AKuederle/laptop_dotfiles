@@ -87,6 +87,43 @@ mybattext:set_markup(markup.bold("BAT"))
 mybat1 = batwidget(0)
 mybat2 = batwidget(1)
 
+-- create lcokscreen widget
+local function lockscreenwidget( )
+  local lockwidget = wibox.widget.textbox()
+  lockwidget:set_markup(markup.bold(" L "))
+  local lock_status = 1
+  lockwidgettimer = timer({ timeout = 120 })
+  lockwidget.update = function()
+    if lock_status == 1 then
+      lockwidget:set_markup(markup.bold(" L "))
+    else
+      awful.util.spawn_with_shell("xautolock -disable")
+      lockwidget:set_markup(markup.fg.color("#E63E10", markup.bold(" L ")))
+    end
+  end
+  lockwidget.toggle = function()
+    if lock_status == 1 then
+      lock_status = 0
+    else
+      awful.util.spawn_with_shell("xautolock -enable")
+      lock_status = 1
+    end
+    lockwidget:update()
+  end
+  lockwidgettimer:connect_signal("timeout", lockwidget.update) 
+  lockwidgettimer:start()
+  lockwidget:update()
+  return lockwidget
+end
+
+mylockscreenwidget = lockscreenwidget()
+lock_controls = awful.util.table.join(
+    awful.button({ }, 1, function () mylockscreenwidget:toggle() end),
+    awful.button({ }, 3, function () awful.util.spawn_with_shell("xautolock -locknow") end)
+)
+mylockscreenwidget:buttons( lock_controls )
+
+
 mywibox = {}
 mypromptbox = {}
 mylayoutbox = {}
@@ -178,7 +215,10 @@ for s = 1, screen.count() do
     right_layout:add(mybat1)
     right_layout:add(space)
     right_layout:add(mybat2)
-    right_layout:add(fourspaces)
+    right_layout:add(space)
+    right_layout:add(space)
+    right_layout:add(mylockscreenwidget)
+    right_layout:add(space)
     right_layout:add(mytextclock)
     right_layout:add(mylayoutbox[s])
 
