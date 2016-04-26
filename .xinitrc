@@ -46,5 +46,8 @@ dropbox &
 nm-applet &
 # volumeicon &
 
+# start xautolock with custom i3lock
+lock_screen.sh &
+
 # Start Awesome_wm
 exec awesome
