@@ -37,6 +37,7 @@ local here = awful.util.getdir("config")
 beautiful.init("/usr/share/awesome/themes/default/theme.lua")
 
 dofile( here .. "/" .. "variabels.lua")
+dofile( here .. "/" .. "helper_funcs.lua")
 dofile( here .. "/" .. "default.lua")
 dofile( here .. "/" .. "widgets.lua")
 dofile( here .. "/" .. "keys.lua")
