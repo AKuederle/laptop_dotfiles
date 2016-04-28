@@ -228,16 +228,19 @@ for s = 1, screen.count() do
     mytasklist[s] = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, mytasklist.buttons)
 
     -- Create the wibox (replace hieight with theme paramter)
-    mywibox[s] = awful.wibox({ position = "top", screen = s , height = "22" })
+    mywibox[s] = awful.wibox({ position = "top", screen = s , height = beautiful.wibox_height })
     -- Widgets that are aligned to the left
     local left_layout = wibox.layout.fixed.horizontal()
+    left_layout:add(mylayoutbox[s])
     left_layout:add(mytaglist[s])
     left_layout:add(mypromptbox[s])
 
     -- Widgets that are aligned to the right
     local right_layout = wibox.layout.fixed.horizontal()
     if s == 1 then right_layout:add(wibox.widget.systray()) end
-    right_layout:add(fourspaces)
+    right_layout:add(space)
+    right_layout:add(space)
+    right_layout:add(space)
     right_layout:add(myvoltext)
     right_layout:add(volumewidget)
     right_layout:add(fourspaces)
@@ -252,7 +255,7 @@ for s = 1, screen.count() do
     right_layout:add(myredshiftwidget)
     right_layout:add(space)
     right_layout:add(mytextclock)
-    right_layout:add(mylayoutbox[s])
+    right_layout:add(space)
 
     -- Now bring it all together (with the tasklist in the middle)
     local layout = wibox.layout.align.horizontal()

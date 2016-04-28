@@ -34,7 +34,7 @@ end
 local here = awful.util.getdir("config")
 
 -- Themes define colours, icons, font and wallpapers.
-beautiful.init("/usr/share/awesome/themes/default/theme.lua")
+beautiful.init( here .. "/" .. "mytheme/theme.lua")
 
 dofile( here .. "/" .. "variabels.lua")
 dofile( here .. "/" .. "helper_funcs.lua")
