@@ -98,6 +98,7 @@ local function lockscreenwidget( )
       lockwidget:set_markup(markup.bold(" L "))
     else
       awful.util.spawn_with_shell("xautolock -disable")
+      awful.util.spawn_with_shell("xset -dpms")
       lockwidget:set_markup(markup.fg.color("#E63E10", markup.bold(" L ")))
     end
   end
@@ -106,6 +107,7 @@ local function lockscreenwidget( )
       lock_status = 0
     else
       awful.util.spawn_with_shell("xautolock -enable")
+      awful.util.spawn_with_shell("xautolock +dpms")
       lock_status = 1
     end
     lockwidget:update()
