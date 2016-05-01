@@ -91,6 +91,8 @@ mybat2 = batwidget(1)
 local function lockscreenwidget( )
   local lockwidget = wibox.widget.textbox()
   lockwidget:set_markup(markup.bold(" L "))
+  awful.util.spawn_with_shell("xautolock -enable")
+  awful.util.spawn_with_shell("xset +dpms")
   local lock_status = 1
   lockwidgettimer = timer({ timeout = 120 })
   lockwidget.update = function()
@@ -107,7 +109,7 @@ local function lockscreenwidget( )
       lock_status = 0
     else
       awful.util.spawn_with_shell("xautolock -enable")
-      awful.util.spawn_with_shell("xautolock +dpms")
+      awful.util.spawn_with_shell("xset +dpms")
       lock_status = 1
     end
     lockwidget:update()

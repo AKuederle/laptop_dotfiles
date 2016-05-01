@@ -51,8 +51,8 @@ globalkeys = awful.util.table.join(globalkeys,
     
     awful.key({ modkey, }, "e",      function () awful.util.spawn("thunar") end),
     awful.key({ modkey, }, "Return", function () awful.util.spawn(terminal) end),
-    awful.key({ modkey, }, "d", function () awful.util.spawn("rofi -show combi -combi-modi 'git,window,run'") end),
-    awful.key({ modkey, }, "q", function () awful.util.spawn("rofi -show git") end),
+    awful.key({ modkey, }, "d", function () awful.util.spawn("rofi -m 0 -show combi -combi-modi 'git,window,run'") end),
+    awful.key({ modkey, }, "q", function () awful.util.spawn("rofi -m 0 -show git") end),
     awful.key({ "Control", "Mod1"}, "Delete", function () awful.util.spawn_with_shell("xautolock -locknow") end)
 )
 -- 
