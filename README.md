@@ -14,4 +14,5 @@
 | Powerevents    | ./logind.conf               | /etc/systemd/logind.conf            |
 | Xresources     | ./.Xresources               | ~/.Xresources                       |
 | PAM login conf | ./pam.d/login               | /etc/pam.d/login                    |
-| PAM passwd conf| ./pam.d/passwd              | /etc/pam.d/passwd                   |                         
+| PAM passwd conf| ./pam.d/passwd              | /etc/pam.d/passwd                   |            
+| Chromium flags | ./chromium-flags.conf       | ~/.config/chromium-flags.conf       |                         
