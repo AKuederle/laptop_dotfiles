@@ -46,6 +46,9 @@ dropbox &
 nm-applet &
 # volumeicon &
 
+# change keymap for X
+setxkbmap -layout us -variant altgr-intl -option 'nodeadkeys,caps:escape'
+
 # start xautolock with custom i3lock
 lock_screen.sh &
 
