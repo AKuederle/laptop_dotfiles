@@ -32,6 +32,6 @@ layouts =
 tag_names = { " main ", " work ", " www ", " mail ", "5", "6", " chat ", "win", "win", "#" }
 
 -- Redshift configuration
-redshift.options = "-t 6500:3600 -r"
+redshift.options = "-l 50.7753:6.083 -t 6500:3600 -r"
 redshift.init(1)
 -- }}}
