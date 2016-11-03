@@ -11,6 +11,14 @@ globalkeys = awful.util.table.join(globalkeys,
     -- Shift + Mod + F3: Force second webbrowser (chromium)
     awful.key({ modkey, "Shift" }, "#69", function () awful.util.spawn_with_shell("chromium") end),
 
+    -- Mod + F4: Launch mailclient (thunderbird)
+    awful.key({ modkey, }, "#70", function ()
+      local matcher = function (c)
+         return awful.rules.match(c, {instance = 'thunderbird'})
+       end
+       awful.client.run_or_raise('thunderbird', matcher)
+     end),
+
     -- Mod + F2: Launch texteditor (sublime)
     awful.key({ modkey, }, "#68", function ()
       local matcher = function (c)

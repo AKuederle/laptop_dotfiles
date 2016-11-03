@@ -18,8 +18,11 @@ awful.rules.rules = {
     -- Set Firefox to always map on tags number 3(www) of screen 1.
     { rule = { class = "Firefox" },
       properties = { tag = tags[1][3] } },
+    -- Set Thunderbird to always map on tags number 4(mail) of screen 1.
+    { rule = { class = "Thunderbird" },
+      properties = { tag = tags[1][4], switchtotag = true } },
     -- Set Chromium to always map on tags number 3(www) of screen 1.
-    { rule = { class = "chromium" },
+    { rule = { class = "Chromium" },
       properties = { tag = tags[1][3], switchtotag = true } },
     -- Set Sublime to always map on tags number 2(work) of screen 1.
     { rule = { class = "Subl3" },
