@@ -43,6 +43,7 @@ export MATLAB_JAVA=/usr/lib/jvm/java-8-openjdk/jre
 
 # Autostart
 dropbox &
+(sleep 5; owncloud) &
 nm-applet &
 # volumeicon &
 
